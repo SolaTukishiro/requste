@@ -18,8 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth','role:client'])->prefix('client')->group(function () {
+Route::middleware(['auth','role:client'])->prefix('client')->name('client.')->group(function () {
     Route::get('/requests', [RequestController::class, 'index'])->name('requests.index');
+    Route::get('/requests/create', [RequestController::class, 'create'])->name('requests.create');
+    Route::post('/requests', [RequestController::class, 'store'])->name('requests.store');
 });
 
 require __DIR__.'/auth.php';
