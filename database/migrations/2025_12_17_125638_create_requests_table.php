@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained('users');
             $table->string('title');
             $table->string('status')->default('open');
+            $table->longText('description');
             $table->timestamps();
         });
     }
