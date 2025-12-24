@@ -23,6 +23,11 @@
                     focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                 </div>
                 <div>
+                    <label for="name">料金</label>
+                    <input type="text" name="price" id="price" class="border-gray-300 focus:border-indigo-300 focus:ring
+                    focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                </div>
+                <div>
                     <button type="button" onclick="location.href='{{ route('client.requests.index')}}'" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
                     <button type="submit" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">登録する</button>
                 </div>

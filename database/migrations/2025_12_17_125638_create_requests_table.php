@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('status')->default('open');
             $table->longText('description');
+            $table->unsignedInteger('price');
             $table->timestamps();
         });
     }

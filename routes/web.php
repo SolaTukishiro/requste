@@ -22,6 +22,7 @@ Route::middleware(['auth','role:client'])->prefix('client')->name('client.')->gr
     Route::get('/requests', [RequestController::class, 'index'])->name('requests.index');
     Route::get('/requests/create', [RequestController::class, 'create'])->name('requests.create');
     Route::post('/requests', [RequestController::class, 'store'])->name('requests.store');
+    Route::get('/requests/{request}', [RequestController::class, 'detail'])->name('requests.detail');
 });
 
 require __DIR__.'/auth.php';
