@@ -35,4 +35,11 @@ class RequestController extends Controller
 
         return redirect()->route('client.requests.index');
     }
+
+    public function detail(RequestModel $request){
+        if($request->client_id != auth()->id()){
+            abort(403);
+        }
+        return view('client.requests.detail', compact('request'));
+    }
 }
