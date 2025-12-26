@@ -4,6 +4,8 @@
     </x-slot>
 
     <div class="p-6">
+            <p>タイトル：</p>
+            <p>{{ $request->title }}</p>
         @if($request->status)
             <p>受付状況：受付中</p>
         @else
@@ -18,8 +20,11 @@
                 作成日：{{ $request->created_at->format('Y/m/d H:i') }}
             </p>
 
-        <a href="{{ route('client.requests.index') }}">
-            一覧へ戻る
-        </a>
+            <a href="{{ route('client.requests.index') }}">
+                一覧へ戻る
+            </a>
+            <a href="{{route('client.requests.edit', $request)}}">
+                修正する
+            </a>
     </div>
 </x-app-layout>

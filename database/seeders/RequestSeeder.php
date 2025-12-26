@@ -49,6 +49,13 @@ class RequestSeeder extends Seeder
                 'description' => '夜の猫探し！任せてください！',
                 'price' => 100000,
             ],
+            [
+                'client_id' => 1,
+                'title' => 'かっこいいサイン作ります',
+                'status' => 0,
+                'description' => 'オリジナルのサイン作りませんか？',
+                'price' => 40000,
+            ],
         ];
 
         foreach ($requests as $request) {
