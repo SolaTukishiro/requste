@@ -15,7 +15,7 @@
                 <div>
                     <label for="name">受付状況</label>
                     <input type="radio" name="status" value="1" class="mr-2" checked>受付中
-                    <input type="radio" name="status" value="0" class="mr-2" >停止中
+                    <input type="radio" name="status" value="0" class="mr-2" >受付停止中
                 </div>
                 <div>
                     <label for="name">説明</label>

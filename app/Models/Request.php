@@ -11,6 +11,7 @@ class Request extends Model
         'title',
         'status',
         'description',
+        'price',
     ];
 
     public function client(){

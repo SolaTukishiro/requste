@@ -16,11 +16,11 @@
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('client.requests.index')" :active="request()->routeIs('client.requests.index')">
-                            案件一覧
-                        </x-nav-link>
                         <x-nav-link :href="route('client.requests.create')" :active="request()->routeIs('client.requests.create')">
                             案件作成
+                        </x-nav-link>
+                        <x-nav-link :href="route('client.requests.index')" :active="request()->routeIs('client.requests.index')">
+                            案件一覧
                         </x-nav-link>
                     @endif
                 </div>
