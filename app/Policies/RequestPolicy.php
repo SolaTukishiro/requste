@@ -7,12 +7,9 @@ use App\Models\User;
 
 class RequestPolicy
 {
-    public function authClientId(RequestModel $request): bool
+    public function update(User $user, RequestModel $request): bool
     {
-        $result = true;
-        if($request->client_id === auth() -> id()){
-            $result = false;
-        }
-        return $result;
+        // 自分が作った依頼ならOK
+        return $request->client_id === $user->id;
     }
 }
