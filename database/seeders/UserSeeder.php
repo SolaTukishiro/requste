@@ -15,18 +15,43 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Client User',
-            'email' => 'client@test.com',
-            'password' => Hash::make('password'),
-            'role' => UserRole::CLIENT,
-        ]);
+        $clients = [
+            [
+                'name' => 'Client1 User',
+                'email' => 'client1@test.com',
+                'password' => Hash::make('password'),
+                'role' => UserRole::CLIENT,
+            ],
+            [
+                'name' => 'Client2 User',
+                'email' => 'client2@test.com',
+                'password' => Hash::make('password'),
+                'role' => UserRole::CLIENT,
+            ]
+        ];
 
-        User::create([
-            'name' => 'Creator User',
-            'email' => 'creator@test.com',
-            'password' => Hash::make('password'),
-            'role' => UserRole::CREATOR,
-        ]);
+        $creators = [
+            [
+                'name' => 'Creator1 User',
+                'email' => 'creator1@test.com',
+                'password' => Hash::make('password'),
+                'role' => UserRole::CREATOR,
+            ],
+            [
+                'name' => 'Creator2 User',
+                'email' => 'creator2@test.com',
+                'password' => Hash::make('password'),
+                'role' => UserRole::CREATOR,
+            ]
+        ];
+
+        foreach($clients as $client){
+            User::create($client);
+        }
+
+
+        foreach($creators as $creator){
+            User::create($creator);
+        }
     }
 }
