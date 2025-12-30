@@ -1,0 +1,9 @@
+/* resources/scss/app.scss */
+@use "client/form";
+@use "client/detail";
+
+/* ① Tailwind本体 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+

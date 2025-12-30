@@ -1,0 +1,39 @@
+.form {
+  @apply max-w-xl mx-auto w-full pb-20;
+
+  /* 構造系 */
+  dl {
+    @apply mb-12;
+  }
+
+  dt {
+    @apply font-medium mb-1;
+  }
+
+  dd {
+    @apply mb-5;
+
+  }
+  & .textInput{
+    @apply border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full;
+  }
+
+  /* ボタンエリア */
+  &-actions {
+    @apply text-center;
+  }
+
+  /* 共通ボタン */
+  &-button {
+    @apply text-black text-sm px-10 py-2 m-10 hover:opacity-50;
+    background-color: #cbd5e0; // Tailwindにない色はCSSでOK
+
+    &.commit {
+      @apply bg-blue-400;
+    }
+
+    &.delete {
+      background-color: #ff6d6d;
+    }
+  }
+}

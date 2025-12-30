@@ -1,0 +1,36 @@
+.form {
+    @apply max-w-xl mx-auto w-full pb-20;
+}
+
+/* 構造系（dl / dt / dd）はCSSのままが正解 */
+.form dl {
+    @apply mb-12;
+}
+
+.form dt {
+    @apply font-medium mb-1;
+}
+
+.form dd {
+    @apply mb-5;
+}
+
+/* ボタンエリア */
+.form-actions {
+    @apply text-center;
+}
+
+/* 共通ボタン */
+.form-button {
+    @apply text-black text-sm px-10 py-2 m-10 hover:opacity-50;
+    background-color: #cbd5e0; /* Tailwindにない色はCSSでOK */
+}
+
+/* 種類別 */
+.form-button.commit {
+    @apply bg-blue-400;
+}
+
+.form-button.delete {
+    background-color: #ff6d6d;
+}
