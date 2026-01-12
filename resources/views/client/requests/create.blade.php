@@ -11,8 +11,7 @@
                     <label for="name">タイトル</label>
                 </dt>
                 <dd>
-                    <input type="text" name="title" id="title" class="border-gray-300 focus:border-indigo-300 focus:ring
-                    focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
+                    <input type="text" name="title" id="title" class="textInput">
                 </dd>
                 <dt>
                     <label for="name">受付状況</label>
@@ -25,15 +24,13 @@
                     <label for="name">説明</label>
                 </dt>
                 <dd>
-                    <input type="text" name="description" id="description" class="border-gray-300 focus:border-indigo-300 focus:ring
-                    focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
+                    <input type="text" name="description" id="description" class="textInput">
                 </dd>
                 <dt>
                     <label for="name">料金</label>
                 </dt>
                 <dd>
-                    <input type="text" name="price" id="price" class="border-gray-300 focus:border-indigo-300 focus:ring
-                    focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
+                    <input type="text" name="price" id="price" class="textInput">
                 </dd>
             </dl>
             <div class="form-actions">
