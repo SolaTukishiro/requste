@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+.form {
+  --ink: #0f172a;
+  --muted: #64748b;
+  --card: #ffffff;
+  --border: rgba(15, 23, 42, 0.08);
+  --accent: #f97316;
+  --accent-ink: #7c2d12;
+  --mint: #ecfdf3;
+  --mint-ink: #0f766e;
+  --rose: #fee2e2;
+  --rose-ink: #b91c1c;
+
+  font-family: "Space Grotesk", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  padding: 56px 24px 72px;
+  min-height: calc(100vh - 120px);
+
+  form {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--card);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 48px rgba(15, 23, 42, 0.1);
+    padding: 36px 40px 32px;
+  }
+
+  dl {
+    margin: 0 0 28px;
+  }
+
+  dt {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  dd {
+    margin: 0 0 18px;
+  }
+
+  input[type="text"],
+  .textInput {
+    width: 100%;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 15px;
+    color: var(--ink);
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: rgba(249, 115, 22, 0.45);
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+    }
+  }
+
+  input[type="radio"] {
+    accent-color: var(--accent);
+    margin-right: 6px;
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    > div {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+  }
+
+  &-button {
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--border);
+    background: #e2e8f0;
+    color: var(--ink);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+    &.commit {
+      color: #0c4a6e;
+      background: #bae6fd;
+      border-color: rgba(14, 116, 144, 0.35);
+    }
+
+    &.delete {
+      color: var(--rose-ink);
+      background: var(--rose);
+      border-color: rgba(185, 28, 28, 0.25);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+    }
+  }
+
+  @media (max-width: 720px) {
+    padding: 36px 16px 56px;
+
+    form {
+      padding: 28px 24px;
+    }
+
+    &-actions {
+      justify-content: stretch;
+    }
+
+    &-button {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

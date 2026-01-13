@@ -20,7 +20,7 @@
                             案件作成
                         </x-nav-link>
                         <x-nav-link :href="route('client.requests.index')" :active="request()->routeIs('client.requests.index')">
-                            案件一覧
+                            作成案件一覧
                         </x-nav-link>
                     @endif
                 </div>

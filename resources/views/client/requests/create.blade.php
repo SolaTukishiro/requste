@@ -1,35 +1,42 @@
-<x-app-layout>
+<x-app-layout class="form">
     <x-slot name="header">
         <h2 class="text-xl font-semibold">案件作成</h2>
     </x-slot>
 
-    <div class="p-6">
+    <div class="form">
         <form action="{{route('client.requests.store')}}" method="POST">
             @csrf
-            <div class="mb-6">
-                <div>
+            <dl>
+                <dt>
                     <label for="name">タイトル</label>
-                    <input type="text" name="title" id="title" class="border-gray-300 focus:border-indigo-300 focus:ring
-                    focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                </div>
-                <div>
+                </dt>
+                <dd>
+                    <input type="text" name="title" id="title" class="textInput">
+                </dd>
+                <dt>
                     <label for="name">受付状況</label>
+                </dt>
+                <dd>
                     <input type="radio" name="status" value="1" class="mr-2" checked>受付中
                     <input type="radio" name="status" value="0" class="mr-2" >受付停止中
-                </div>
-                <div>
+                </dd>
+                <dt>
                     <label for="name">説明</label>
-                    <input type="text" name="description" id="description" class="border-gray-300 focus:border-indigo-300 focus:ring
-                    focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                </div>
-                <div>
+                </dt>
+                <dd>
+                    <input type="text" name="description" id="description" class="textInput">
+                </dd>
+                <dt>
                     <label for="name">料金</label>
-                    <input type="text" name="price" id="price" class="border-gray-300 focus:border-indigo-300 focus:ring
-                    focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                </div>
+                </dt>
+                <dd>
+                    <input type="text" name="price" id="price" class="textInput">
+                </dd>
+            </dl>
+            <div class="form-actions">
                 <div>
-                    <button type="button" onclick="location.href='{{ route('client.requests.index')}}'" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
-                    <button type="submit" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">登録する</button>
+                    <input type="button" onclick="location.href='{{ route('client.requests.index')}}'" class="form-button" value="戻る">
+                    <input type="submit" class="commit form-button" value="登録する">
                 </div>
             </div>
         </form>
