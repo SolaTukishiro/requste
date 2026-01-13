@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Client\RequestController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Creator\ApplicationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +26,10 @@ Route::middleware(['auth','role:client'])->prefix('client')->name('client.')->gr
     Route::get('/requests/{request}', [RequestController::class, 'detail'])->name('requests.detail');
     Route::get('requests/{request}/edit', [RequestController::class, 'edit'])->name('requests.edit');
     Route::patch('/requests/{requestModel}', [RequestController::class, 'update'])->name('requests.update');
+});
+
+Route::middleware(['auth','role:creator'])->prefix('creator')->name('creator.')->group(function () {
+    Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
 });
 
 require __DIR__.'/auth.php';

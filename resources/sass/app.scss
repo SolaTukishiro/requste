@@ -1,7 +1,10 @@
 /* resources/scss/app.scss */
-@use "client/form";
-@use "client/detail";
-@use "client/index";
+@use "client/form" as client-form;
+@use "client/detail" as client-detail;
+@use "client/index" as client-index;
+@use "creator/form" as creator-form;
+@use "creator/detail" as creator-detail;
+@use "creator/index" as creator-index;
 
 /* ① Tailwind本体 */
 @tailwind base;

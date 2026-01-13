@@ -13,13 +13,13 @@ class ApplicationController extends Controller
 
     public function index()
     {
-        $recruitments = Application::where('creator_id', auth()->id())->get();
-        return view('creator.recruitments.index', compact('recruitments'));
+        $applications = Application::where('creator_id', auth()->id())->get();
+        return view('creator.applications.index', compact('applications'));
     }
 
     public function create()
     {
-        return view('creator.recruitments.create');
+        return view('creator.applications.create');
     }
 
     public function store(Request $request)
@@ -38,21 +38,21 @@ class ApplicationController extends Controller
             'price' => $request->price,
         ]);
 
-        return redirect()->route('creator.recruitments.index');
+        return redirect()->route('creator.applications.index');
     }
 
     public function detail(Application $recruitment)
     {
         $this->authorize('update', $recruitment);
 
-        return view('creator.recruitments.detail', compact('recruitment'));
+        return view('creator.applications.detail', compact('recruitment'));
     }
 
     public function edit(Application $recruitment)
     {
         $this->authorize('update', $recruitment);
 
-        return view('creator.recruitments.edit', compact('recruitment'));
+        return view('creator.applications.edit', compact('recruitment'));
     }
 
     public function update(Application $recruitment, Request $request)
@@ -66,6 +66,6 @@ class ApplicationController extends Controller
             'price' => $request->price,
         ]);
 
-        return redirect()->route('creator.recruitments.index');
+        return redirect()->route('creator.applications.index');
     }
 }

@@ -22,6 +22,8 @@
                         <x-nav-link :href="route('client.requests.index')" :active="request()->routeIs('client.requests.index')">
                             作成案件一覧
                         </x-nav-link>
+                    @elseif(Auth::user()->role->value == 'creator')
+
                     @endif
                 </div>
             </div>
