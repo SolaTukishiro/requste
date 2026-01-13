@@ -1,0 +1,27 @@
+.form {
+  padding-bottom: 80px;
+}
+.form dt {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.form dd {
+  margin-bottom: 20px;
+}
+.form .btn {
+  text-align: center;
+}
+.form .btn input {
+  background-color: #cbd5e0;
+  color: #000;
+  font-size: 14px;
+  padding: 10px 40px;
+}
+.form .btn .commit {
+  background-color: #60a5fa;
+}
+.form .btn .hover:hover {
+  opacity: 0.8;
+}
+
+/*# sourceMappingURL=form.css.map */

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="request-index__page-title">案件一覧</h2>
+        <h2 class="request-index__page-title">依頼一覧</h2>
     </x-slot>
     <section class="request-index">
         <div class="request-index__container">
@@ -30,8 +30,7 @@
                     </a>
                 @empty
                     <div class="request-index__empty">
-                        <p class="request-index__empty-title">案件はまだありません</p>
-                        <p class="request-index__empty-text">新しい案件が登録されるとここに表示されます。</p>
+                        <p class="request-index__empty-title">作成した依頼はまだありません</p>
                     </div>
                 @endforelse
             </div>
