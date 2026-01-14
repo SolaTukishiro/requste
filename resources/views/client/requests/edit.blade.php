@@ -39,9 +39,11 @@
                     <input type="button" onclick="location.href='{{ route('client.requests.detail', $request->id)}}'" class="form-button" value="戻る">
                     <input type="submit" class="commit form-button" value="登録する">
                 </div>
-                <div>
-                    <input type="button" onclick="" class="form-button delete" value="削除">
-                </div>
+                <form action="{{ route('client.requests.destroy', $request->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" class="form-button delete" value="削除">
+                </form>
             </div>
         </form>
     </div>

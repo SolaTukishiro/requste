@@ -65,4 +65,11 @@ class RequestController extends Controller
 
         return redirect()->route('client.requests.index');
     }
+
+    public function destroy(RequestModel $requestModel){
+        $this->authorize('update', $requestModel);
+        $requestModel->delete();
+
+        return redirect()->route('client.requests.index');
+    }
 }
