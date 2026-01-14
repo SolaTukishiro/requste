@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('description');
             $table->unsignedInteger('price');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
