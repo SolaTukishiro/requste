@@ -20,10 +20,12 @@
                             案件作成
                         </x-nav-link>
                         <x-nav-link :href="route('client.requests.index')" :active="request()->routeIs('client.requests.index')">
-                            作成案件一覧
+                            作成募集一覧
                         </x-nav-link>
                     @elseif(Auth::user()->role->value == 'creator')
-
+                        <x-nav-link :href="route('creator.applications.index')">
+                            作成案件一覧
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
