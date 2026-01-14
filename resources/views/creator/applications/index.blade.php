@@ -6,7 +6,7 @@
         <div class="application-index__container">
             <div class="application-index__grid">
                 @forelse($applications as $application)
-                    <a href="#" class ="application-index__card">
+                    <a href="{{route('creator.applications.detail', $application)}}" class ="application-index__card">
                         <div class="application-index__card-header">
                             <div>
                                 <p class="application-index__creator">{{ $application->creator->name }}</p>

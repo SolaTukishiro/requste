@@ -4,7 +4,7 @@
     </x-slot>
 
     <div class="form">
-        <form action="{{route('client.requests.store')}}" method="POST">
+        <form action="{{route('creator.applications.store')}}" method="POST">
             @csrf
             <dl>
                 <dt>

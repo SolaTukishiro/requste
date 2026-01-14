@@ -30,6 +30,12 @@ Route::middleware(['auth','role:client'])->prefix('client')->name('client.')->gr
 
 Route::middleware(['auth','role:creator'])->prefix('creator')->name('creator.')->group(function () {
     Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
+    Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
+    Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store');
+    Route::get('/applications/{application}', [ApplicationController::class, 'detail'])->name('applications.detail');
+    Route::get('applications/{application}/edit', [ApplicationController::class, 'edit'])->name('applications.edit');
+    Route::match(['patch', 'post'], '/applications/{application}', [ApplicationController::class, 'update'])
+        ->name('applications.update');
 });
 
 require __DIR__.'/auth.php';

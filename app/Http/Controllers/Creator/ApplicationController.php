@@ -41,25 +41,25 @@ class ApplicationController extends Controller
         return redirect()->route('creator.applications.index');
     }
 
-    public function detail(Application $recruitment)
+    public function detail(Application $application)
     {
-        $this->authorize('update', $recruitment);
+        $this->authorize('update', $application);
 
-        return view('creator.applications.detail', compact('recruitment'));
+        return view('creator.applications.detail', compact('application'));
     }
 
-    public function edit(Application $recruitment)
+    public function edit(Application $application)
     {
-        $this->authorize('update', $recruitment);
+        $this->authorize('update', $application);
 
-        return view('creator.applications.edit', compact('recruitment'));
+        return view('creator.applications.edit', compact('application'));
     }
 
-    public function update(Application $recruitment, Request $request)
+    public function update(Application $application, Request $request)
     {
-        $this->authorize('update', $recruitment);
+        $this->authorize('update', $application);
 
-        $recruitment->update([
+        $application->update([
             'title' => $request->title,
             'description' => $request->description,
             'status' => $request->status,
