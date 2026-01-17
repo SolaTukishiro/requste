@@ -66,9 +66,30 @@ class RequestController extends Controller
         return redirect()->route('client.requests.index');
     }
 
-    public function destroy(RequestModel $requestModel){
-        $this->authorize('update', $requestModel);
-        $requestModel->delete();
+    public function destroy($id){
+        $request = RequestModel::where('id', $id)->firstOrFail();
+        $this->authorize('update', $request);
+        $request->delete();
+
+        return redirect()->route('client.requests.index');
+    }
+
+    public function deletedIndex(){
+        $requests = RequestModel::onlyTrashed()->where('client_id', auth()->id())->get();
+        return view('client.requests.delete.show', compact('requests'));
+    }
+
+    public function deletedDetail($id){
+        $request = RequestModel::onlyTrashed()->where('id', $id)->firstOrFail();
+        $this->authorize('update', $request);
+
+        return view('client.requests.delete.detail', compact('request'));
+    }
+
+    public function restore($id){
+        $request = RequestModel::onlyTrashed()->where('id', $id)->firstOrFail();
+        $this->authorize('update', $request);
+        $request->restore();
 
         return redirect()->route('client.requests.index');
     }

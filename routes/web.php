@@ -23,10 +23,13 @@ Route::middleware(['auth','role:client'])->prefix('client')->name('client.')->gr
     Route::get('/requests', [RequestController::class, 'index'])->name('requests.index');
     Route::get('/requests/create', [RequestController::class, 'create'])->name('requests.create');
     Route::post('/requests', [RequestController::class, 'store'])->name('requests.store');
+    Route::get('/requests/deleted', [RequestController::class, 'deletedIndex'])->name('requests.deleted.index');
+    Route::get('/requests/deleted/{request}', [RequestController::class, 'deletedDetail'])->name('requests.deleted.detail');
+    Route::patch('/requests/deleted/{request}/restore', [RequestController::class, 'restore'])->name('requests.deleted.restore');
     Route::get('/requests/{request}', [RequestController::class, 'detail'])->name('requests.detail');
-    Route::get('requests/{request}/edit', [RequestController::class, 'edit'])->name('requests.edit');
-    Route::patch('/requests/{requestModel}', [RequestController::class, 'update'])->name('requests.update');
-    Route::delete('/requests/{requestModel}', [RequestController::class, 'destroy'])->name('requests.destroy');
+    Route::get('/requests/{request}/edit', [RequestController::class, 'edit'])->name('requests.edit');
+    Route::patch('/requests/{request}', [RequestController::class, 'update'])->name('requests.update');
+    Route::delete('/requests/{request}', [RequestController::class, 'destroy'])->name('requests.destroy');
 });
 
 Route::middleware(['auth','role:creator'])->prefix('creator')->name('creator.')->group(function () {
