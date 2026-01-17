@@ -22,6 +22,9 @@
                         <x-nav-link :href="route('client.requests.index')" :active="request()->routeIs('client.requests.index')">
                             作成募集一覧
                         </x-nav-link>
+                        <x-nav-link :href="route('client.requests.deleted.index')" :active="request()->routeIs('client.requests.deleted.index')">
+                            削除済み依頼一覧
+                        </x-nav-link>
                     @elseif(Auth::user()->role->value == 'creator')
                         <x-nav-link :href="route('creator.applications.create')" :active="request()->routeIs('client.requests.create')">
                             案件作成
