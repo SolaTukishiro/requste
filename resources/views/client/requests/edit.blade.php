@@ -38,13 +38,26 @@
                 <div>
                     <input type="button" onclick="location.href='{{ route('client.requests.detail', $request->id)}}'" class="form-button" value="戻る">
                     <input type="submit" class="commit form-button" value="登録する">
+                    <input type="submit" form="delete-form" class="form-button delete" value="削除">
                 </div>
-                <form action="{{ route('client.requests.destroy', $request->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" class="form-button delete" value="削除">
-                </form>
             </div>
         </form>
+        <form action="{{ route('client.requests.destroy', $request->id) }}" method="POST" id="delete-form" hidden>
+            @csrf
+            @method('DELETE')
+        </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const deleteForm = document.getElementById('delete-form');
+            if (!deleteForm) {
+                return;
+            }
+            deleteForm.addEventListener('submit', (event) => {
+                if (!window.confirm('この依頼を削除します。よろしいですか？\n※削除後は「削除済み依頼一覧」から復元できます。')) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 </x-app-layout>

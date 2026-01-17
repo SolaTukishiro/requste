@@ -38,7 +38,7 @@
                 <a class="request-detail__button is-ghost" href="{{ route('client.requests.deleted.index') }}">
                     一覧へ戻る
                 </a>
-                <form action="{{ route('client.requests.deleted.restore', $request->id) }}" method="POST">
+                <form action="{{ route('client.requests.deleted.restore', $request->id) }}" id="restore" method="POST">
                     @csrf
                     @method('PATCH')
                     <input type="submit" class="form-button submit" value="復元">
@@ -46,4 +46,17 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const deleteForm = document.getElementById('restore');
+            if (!deleteForm) {
+                return;
+            }
+            deleteForm.addEventListener('submit', (event) => {
+                if (!window.confirm('この依頼を復元します。よろしいですか？')) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 </x-app-layout>
