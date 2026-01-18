@@ -38,11 +38,26 @@
                 <div>
                     <input type="button" onclick="location.href='{{ route('creator.applications.detail', $application->id)}}'" class="form-button" value="戻る">
                     <input type="submit" class="commit form-button" value="登録する">
-                </div>
-                <div>
-                    <input type="button" onclick="" class="form-button delete" value="削除">
+                    <input type="submit" class="delete form-button" form="delete-form" value="削除">
                 </div>
             </div>
         </form>
+        <form action="{{ route('creator.applications.destroy', $application->id) }}" method="POST" id="delete-form" hidden>
+            @csrf
+            @method('DELETE')
+        </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const deleteForm = document.getElementById('delete-form');
+            if (!deleteForm) {
+                return;
+            }
+            deleteForm.addEventListener('submit', (event) => {
+                if (!window.confirm('この依頼を削除します。よろしいですか？\n※削除後は「削除済み案件一覧」から復元できます。')) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 </x-app-layout>

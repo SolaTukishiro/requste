@@ -36,10 +36,13 @@ Route::middleware(['auth','role:creator'])->prefix('creator')->name('creator.')-
     Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
     Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
     Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store');
+    Route::get('/applications/deleted', [ApplicationController::class, 'deletedIndex'])->name('applications.deleted.index');
+    Route::get('/applications/deleted/{application}', [ApplicationController::class, 'deletedDetail'])->name('applications.deleted.detail');
+    Route::patch('/applications/deleted/{application}/restore', [ApplicationController::class, 'restore'])->name('applications.deleted.restore');
     Route::get('/applications/{application}', [ApplicationController::class, 'detail'])->name('applications.detail');
     Route::get('applications/{application}/edit', [ApplicationController::class, 'edit'])->name('applications.edit');
-    Route::match(['patch', 'post'], '/applications/{application}', [ApplicationController::class, 'update'])
-        ->name('applications.update');
+    Route::match(['patch', 'post'], '/applications/{application}', [ApplicationController::class, 'update'])->name('applications.update');
+    Route::delete('/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
 });
 
 require __DIR__.'/auth.php';

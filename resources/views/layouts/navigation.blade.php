@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @if(Auth::user()->role->value == 'client')
+                    @if(Auth::user()->role->value === 'client')
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
@@ -25,12 +25,18 @@
                         <x-nav-link :href="route('client.requests.deleted.index')" :active="request()->routeIs('client.requests.deleted.index')">
                             削除済み依頼一覧
                         </x-nav-link>
-                    @elseif(Auth::user()->role->value == 'creator')
+                    @elseif(Auth::user()->role->value === 'creator')
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('creator.applications.create')" :active="request()->routeIs('client.requests.create')">
                             案件作成
                         </x-nav-link>
-                        <x-nav-link :href="route('creator.applications.index')">
+                        <x-nav-link :href="route('creator.applications.index')" :active="request()->routeIs('creator.applications.index')">
                             作成案件一覧
+                        </x-nav-link>
+                        <x-nav-link :href="route('creator.applications.deleted.index')" :active="request()->routeIs('creator.applications.deleted.index')">
+                            削除済み案件一覧
                         </x-nav-link>
                     @endif
                 </div>
