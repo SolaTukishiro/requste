@@ -68,4 +68,32 @@ class ApplicationController extends Controller
 
         return redirect()->route('creator.applications.index');
     }
+
+    public function destroy($id){
+        $request = Application::where('id', $id)->firstOrFail();
+        $this->authorize('update', $request);
+        $request->delete();
+
+        return redirect()->route('creator.applications.index');
+    }
+
+    public function deletedIndex(){
+        $applications = Application::onlyTrashed()->where('creator_id', auth()->id())->get();
+        return view('creator.applications.delete.show', compact('applications'));
+    }
+
+    public function deletedDetail($id){
+        $application = Application::onlyTrashed()->where('id', $id)->firstOrFail();
+        $this->authorize('update', $application);
+
+        return view('creator.applications.delete.detail', compact('application'));
+    }
+
+    public function restore($id){
+        $application = Application::onlyTrashed()->where('id', $id)->firstOrFail();
+        $this->authorize('update', $application);
+        $application->restore();
+
+        return redirect()->route('creator.applications.index');
+    }
 }
