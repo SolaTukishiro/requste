@@ -3,6 +3,7 @@
 use App\Http\Controllers\Client\RequestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Creator\ApplicationController;
+use App\Http\Controllers\RequestApplication;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -43,6 +44,10 @@ Route::middleware(['auth','role:creator'])->prefix('creator')->name('creator.')-
     Route::get('applications/{application}/edit', [ApplicationController::class, 'edit'])->name('applications.edit');
     Route::match(['patch', 'post'], '/applications/{application}', [ApplicationController::class, 'update'])->name('applications.update');
     Route::delete('/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
+
+    Route::prefix('requests')->name('requests.')->group(function () {
+        Route::get('/', [RequestApplication::class, 'requestsShow'])->name('show');
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -29,6 +29,9 @@
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('creator.requests.show')" :active="request()->routeIs('creator.requests.show')">
+                            公開依頼一覧
+                        </x-nav-link>
                         <x-nav-link :href="route('creator.applications.create')" :active="request()->routeIs('client.requests.create')">
                             案件作成
                         </x-nav-link>
