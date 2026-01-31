@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('request_id')->constrained('requests')->cascadeOnDelete();
             $table->foreignId('creator_id')->constrained('users')->cascadeOnDelete();
             $table->text('message');
+            $table->unsignedInteger('proposed_price');
+            $table->unsignedSmallInteger('delivery_estimate');
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
             $table->unique(['request_id', 'creator_id']); // 二重応募防止
