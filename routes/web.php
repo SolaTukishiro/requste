@@ -47,6 +47,10 @@ Route::middleware(['auth','role:creator'])->prefix('creator')->name('creator.')-
 
     Route::prefix('requests')->name('requests.')->group(function () {
         Route::get('/', [RequestApplication::class, 'requestsShow'])->name('show');
+        Route::get('/{request}', [RequestApplication::class, 'requestsDetail'])->name('detail');
+        Route::get('/{request}/application',[RequestApplication::class, 'requestsApplication'])->name('application');
+        Route::post('/{request}/applicationStore', [RequestApplication::class, 'requestsApplicationStore'])->name('applicationStore');
+
     });
 });
 

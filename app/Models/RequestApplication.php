@@ -11,7 +11,9 @@ class RequestApplication extends Model
         'request_id',
         'creator_id',
         'message',
-        'status'
+        'proposed_price',
+        'delivery_estimate',
+        'status',
     ];
 
     protected $casts = [
