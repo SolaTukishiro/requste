@@ -4,7 +4,7 @@
     </x-slot>
 
     <div class="form">
-        <form action="{{route('client.requests.update', $request->id)}}" method="POST">
+        <form action="{{route('client.requests.update', $request)}}" method="POST">
             @csrf
             @method('PATCH')
             <dl>

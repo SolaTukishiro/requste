@@ -24,7 +24,7 @@ class NewPasswordController extends Controller
     }
 
     /**
-     * Handle an incoming new password request.
+     * Handle an incoming new password requests.
      *
      * @throws \Illuminate\Validation\ValidationException
      */

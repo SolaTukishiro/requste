@@ -79,6 +79,7 @@
   &__badge {
     display: inline-flex;
     align-items: center;
+    gap: 6px;
     padding: 6px 14px;
     border-radius: 999px;
     font-size: 11px;
@@ -87,6 +88,7 @@
     text-transform: uppercase;
     border: 1px solid transparent;
     white-space: nowrap;
+    transition: all 0.2s ease;
 
     &.is-open {
       color: var(--mint-ink);
@@ -98,6 +100,56 @@
       color: var(--rose-ink);
       background: var(--rose);
       border-color: rgba(185, 28, 28, 0.2);
+    }
+
+    // 選考中 - アンバー/オレンジ系
+    &.is-pending {
+      color: #b45309;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-color: rgba(180, 83, 9, 0.25);
+      box-shadow: 0 2px 8px rgba(251, 191, 36, 0.2);
+
+      &::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #f59e0b;
+        animation: pulse-pending 1.5s ease-in-out infinite;
+      }
+    }
+
+    // 採用 - グリーン系
+    &.is-accepted {
+      color: #047857;
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-color: rgba(4, 120, 87, 0.25);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+
+      &::before {
+        content: "✓";
+        font-size: 10px;
+        font-weight: 700;
+      }
+    }
+
+    // 見送り - グレー系
+    &.is-rejected {
+      color: #6b7280;
+      background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+      border-color: rgba(107, 114, 128, 0.25);
+      box-shadow: 0 2px 8px rgba(107, 114, 128, 0.1);
+    }
+  }
+
+  @keyframes pulse-pending {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.2);
     }
   }
 
@@ -127,6 +179,12 @@
     border: 1px solid rgba(249, 115, 22, 0.3);
   }
 
+  &__applications {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
   &__empty {
     grid-column: 1 / -1;
     padding: 40px 24px;
@@ -146,6 +204,69 @@
   &__empty-text {
     margin: 0;
     font-size: 14px;
+  }
+
+  &__pagination {
+    margin-top: 40px;
+
+    > nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+
+      // Showing X to Y of Z results
+      > div:first-child {
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      // ページ番号リンクのコンテナ
+      > div:last-child {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        span, a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 40px;
+          height: 40px;
+          padding: 0 12px;
+          border-radius: 10px;
+          font-size: 14px;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        a {
+          color: var(--ink);
+          background: var(--card);
+          border: 1px solid var(--border);
+
+          &:hover {
+            background: #f1f5f9;
+            border-color: rgba(15, 23, 42, 0.15);
+          }
+        }
+
+        span[aria-current="page"] span {
+          color: #fff;
+          background: var(--ink);
+          border: 1px solid var(--ink);
+        }
+
+        span[aria-disabled="true"] span {
+          color: var(--muted);
+          background: #f8fafc;
+          border: 1px solid var(--border);
+          cursor: not-allowed;
+        }
+      }
+    }
   }
 
   @media (max-width: 720px) {

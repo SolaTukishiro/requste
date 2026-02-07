@@ -18,7 +18,7 @@
                 <div class="request-detail__meta-item">
                     <span class="request-detail__label">作成日</span>
                     <span class="request-detail__value">
-                        {{ $request->created_at->format('Y/m/d H:i') }}
+                        {{ optional($request->created_at)->format('Y/m/d H:i') }}
                     </span>
                 </div>
                 <div class="request-detail__meta-item">
@@ -35,16 +35,29 @@
             </div>
 
             <div class="request-detail__actions">
-                <a class="request-detail__button is-ghost" href="{{ route('client.requests.index') }}">
+                <a class="request-detail__button is-ghost" href="{{ route('creator.requests.show') }}">
                     一覧へ戻る
                 </a>
-                <a class="request-detail__button is-secondary" href="{{ route('client.requests.applications', $request) }}">
-                    応募一覧を見る
-                </a>
-                <a class="request-detail__button is-primary" href="{{ route('client.requests.edit', $request) }}">
-                    修正する
-                </a>
+                @if($request->status)
+                    @if($isApplied)
+                        <button class="request-detail__button is-primary is-disabled" disabled>
+                            応募済み
+                        </button>
+                    @else
+                        <a class="request-detail__button is-primary" href="{{ route('creator.requests.application', $request) }}">
+                            応募する
+                        </a>
+                    @endif
+                @endif
             </div>
         </div>
     </div>
+
+    <style>
+        .request-detail__button.is-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    </style>
 </x-app-layout>

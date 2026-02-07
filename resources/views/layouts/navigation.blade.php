@@ -25,11 +25,23 @@
                         <x-nav-link :href="route('client.requests.deleted.index')" :active="request()->routeIs('client.requests.deleted.index')">
                             削除済み依頼一覧
                         </x-nav-link>
+                        <x-nav-link :href="route('client.applications.index')" :active="request()->routeIs('client.applications.index')">
+                            応募者一覧
+                        </x-nav-link>
+                        <x-nav-link :href="route('client.conversations.index')" :active="request()->routeIs('client.conversations.*')">
+                            チャット
+                        </x-nav-link>
                     @elseif(Auth::user()->role->value === 'creator')
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('creator.applications.create')" :active="request()->routeIs('client.requests.create')">
+                        <x-nav-link :href="route('creator.requests.show')" :active="request()->routeIs('creator.requests.show')">
+                            公開依頼一覧
+                        </x-nav-link>
+                        <x-nav-link :href="route('creator.requests.applications.show')" :active="request()->routeIs('creator.requests.applications.show')">
+                            応募済み案件
+                        </x-nav-link>
+                        <x-nav-link :href="route('creator.applications.create')" :active="request()->routeIs('creator.applications.create')">
                             案件作成
                         </x-nav-link>
                         <x-nav-link :href="route('creator.applications.index')" :active="request()->routeIs('creator.applications.index')">
@@ -37,6 +49,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('creator.applications.deleted.index')" :active="request()->routeIs('creator.applications.deleted.index')">
                             削除済み案件一覧
+                        </x-nav-link>
+                        <x-nav-link :href="route('creator.conversations.index')" :active="request()->routeIs('creator.conversations.*')">
+                            チャット
                         </x-nav-link>
                     @endif
                 </div>

@@ -23,6 +23,9 @@
                         </p>
                         <div class="request-index__meta">
                             <span class="request-index__price">¥{{ number_format($request->price) }}</span>
+                            <span class="request-index__applications">
+                                応募 {{ $request->applications_count }}件
+                            </span>
                             <span class="request-index__date">
                                 {{ $request->created_at->format('Y/m/d') }}
                             </span>

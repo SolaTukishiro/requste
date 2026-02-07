@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Client\RequestController;
+use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Creator\ApplicationController;
+use App\Http\Controllers\RequestApplication;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,6 +32,15 @@ Route::middleware(['auth','role:client'])->prefix('client')->name('client.')->gr
     Route::get('/requests/{request}/edit', [RequestController::class, 'edit'])->name('requests.edit');
     Route::patch('/requests/{request}', [RequestController::class, 'update'])->name('requests.update');
     Route::delete('/requests/{request}', [RequestController::class, 'destroy'])->name('requests.destroy');
+    Route::get('/requests/{request}/applications', [RequestApplication::class, 'clientApplicationsIndex'])->name('requests.applications');
+    Route::get('/requests/{request}/applications/{application}', [RequestApplication::class, 'clientApplicationDetail'])->name('requests.applications.detail');
+    Route::get('/applications', [RequestApplication::class, 'clientAllApplications'])->name('applications.index');
+    Route::get('/applications/{application}', [RequestApplication::class, 'clientAllApplicationDetail'])->name('applications.detail');
+    Route::patch('/applications/{application}/accept', [RequestApplication::class, 'accept'])->name('applications.accept');
+    Route::patch('/applications/{application}/reject', [RequestApplication::class, 'reject'])->name('applications.reject');
+    Route::get('/conversations', [ConversationController::class, 'index'])->name('conversations.index');
+    Route::get('/conversations/{conversation}', [ConversationController::class, 'show'])->name('conversations.show');
+    Route::post('/conversations/{conversation}/messages', [ConversationController::class, 'sendMessage'])->name('conversations.sendMessage');
 });
 
 Route::middleware(['auth','role:creator'])->prefix('creator')->name('creator.')->group(function () {
@@ -43,6 +54,21 @@ Route::middleware(['auth','role:creator'])->prefix('creator')->name('creator.')-
     Route::get('applications/{application}/edit', [ApplicationController::class, 'edit'])->name('applications.edit');
     Route::match(['patch', 'post'], '/applications/{application}', [ApplicationController::class, 'update'])->name('applications.update');
     Route::delete('/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
+
+    Route::prefix('requests')->name('requests.')->group(function () {
+        Route::get('/', [RequestApplication::class, 'requestsShow'])->name('show');
+        Route::prefix('applications')->name('applications.')->group(function () {
+            Route::get('show', [RequestApplication::class, 'applicationsShow'])->name('show');
+            Route::get('show/{application}', [RequestApplication::class, 'applicationsShowDetail'])->name('show.detail');
+            Route::delete('show/{application}', [RequestApplication::class, 'applicationsDestroy'])->name('destroy');
+        });
+        Route::get('/{request}', [RequestApplication::class, 'requestsDetail'])->name('detail');
+        Route::get('/{request}/application',[RequestApplication::class, 'requestsApplication'])->name('application');
+        Route::post('/{request}/applicationStore', [RequestApplication::class, 'requestsApplicationStore'])->name('applicationStore');
+    });
+    Route::get('/conversations', [ConversationController::class, 'index'])->name('conversations.index');
+    Route::get('/conversations/{conversation}', [ConversationController::class, 'show'])->name('conversations.show');
+    Route::post('/conversations/{conversation}/messages', [ConversationController::class, 'sendMessage'])->name('conversations.sendMessage');
 });
 
 require __DIR__.'/auth.php';
