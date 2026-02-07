@@ -58,6 +58,12 @@
                     </div>
                 @endforelse
             </div>
+
+            @if($requests->hasPages())
+                <div class="request-index__pagination">
+                    {{ $requests->links() }}
+                </div>
+            @endif
         </div>
     </section>
 

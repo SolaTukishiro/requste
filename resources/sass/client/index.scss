@@ -200,6 +200,69 @@
     font-size: 14px;
   }
 
+  &__pagination {
+    margin-top: 40px;
+
+    > nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+
+      // Showing X to Y of Z results
+      > div:first-child {
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      // ページ番号リンクのコンテナ
+      > div:last-child {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        span, a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 40px;
+          height: 40px;
+          padding: 0 12px;
+          border-radius: 10px;
+          font-size: 14px;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        a {
+          color: var(--ink);
+          background: var(--card);
+          border: 1px solid var(--border);
+
+          &:hover {
+            background: #f1f5f9;
+            border-color: rgba(15, 23, 42, 0.15);
+          }
+        }
+
+        span[aria-current="page"] span {
+          color: #fff;
+          background: var(--ink);
+          border: 1px solid var(--ink);
+        }
+
+        span[aria-disabled="true"] span {
+          color: var(--muted);
+          background: #f8fafc;
+          border: 1px solid var(--border);
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
   @media (max-width: 720px) {
     padding: 36px 16px 56px;
 
