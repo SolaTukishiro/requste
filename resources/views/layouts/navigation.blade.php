@@ -25,6 +25,9 @@
                         <x-nav-link :href="route('client.requests.deleted.index')" :active="request()->routeIs('client.requests.deleted.index')">
                             削除済み依頼一覧
                         </x-nav-link>
+                        <x-nav-link :href="route('client.applications.index')" :active="request()->routeIs('client.applications.index')">
+                            応募者一覧
+                        </x-nav-link>
                     @elseif(Auth::user()->role->value === 'creator')
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}

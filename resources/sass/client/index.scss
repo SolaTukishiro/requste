@@ -179,6 +179,12 @@
     border: 1px solid rgba(249, 115, 22, 0.3);
   }
 
+  &__applications {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
   &__empty {
     grid-column: 1 / -1;
     padding: 40px 24px;

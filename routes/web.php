@@ -31,6 +31,10 @@ Route::middleware(['auth','role:client'])->prefix('client')->name('client.')->gr
     Route::get('/requests/{request}/edit', [RequestController::class, 'edit'])->name('requests.edit');
     Route::patch('/requests/{request}', [RequestController::class, 'update'])->name('requests.update');
     Route::delete('/requests/{request}', [RequestController::class, 'destroy'])->name('requests.destroy');
+    Route::get('/requests/{request}/applications', [RequestApplication::class, 'clientApplicationsIndex'])->name('requests.applications');
+    Route::get('/requests/{request}/applications/{application}', [RequestApplication::class, 'clientApplicationDetail'])->name('requests.applications.detail');
+    Route::get('/applications', [RequestApplication::class, 'clientAllApplications'])->name('applications.index');
+    Route::get('/applications/{application}', [RequestApplication::class, 'clientAllApplicationDetail'])->name('applications.detail');
 });
 
 Route::middleware(['auth','role:creator'])->prefix('creator')->name('creator.')->group(function () {

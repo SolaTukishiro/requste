@@ -38,6 +38,9 @@
                 <a class="request-detail__button is-ghost" href="{{ route('client.requests.index') }}">
                     一覧へ戻る
                 </a>
+                <a class="request-detail__button is-secondary" href="{{ route('client.requests.applications', $request) }}">
+                    応募一覧を見る
+                </a>
                 <a class="request-detail__button is-primary" href="{{ route('client.requests.edit', $request) }}">
                     修正する
                 </a>
