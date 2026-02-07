@@ -187,9 +187,35 @@
       border-color: rgba(249, 115, 22, 0.35);
     }
 
+    &.is-danger {
+      color: #991b1b;
+      background: #fee2e2;
+      border-color: rgba(185, 28, 28, 0.35);
+    }
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+    }
+  }
+
+  &__flash {
+    margin-top: 16px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+
+    &.is-success {
+      color: #047857;
+      background: #d1fae5;
+      border: 1px solid rgba(4, 120, 87, 0.25);
+    }
+
+    &.is-error {
+      color: #991b1b;
+      background: #fee2e2;
+      border: 1px solid rgba(185, 28, 28, 0.25);
     }
   }
 

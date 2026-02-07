@@ -6,6 +6,7 @@
 @use "creator/form" as creator-form;
 @use "creator/detail" as creator-detail;
 @use "creator/index" as creator-index;
+@use "chat" as chat;
 
 /* ① Tailwind本体 */
 @tailwind base;
