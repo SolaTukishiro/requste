@@ -14,7 +14,9 @@ class RequestController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function index(){
-        $requests = RequestModel::where('client_id', auth()->id())->get();
+        $requests = RequestModel::where('client_id', auth()->id())
+            ->withCount('applications')
+            ->get();
         return view('client.requests.index', compact('requests'));
     }
 

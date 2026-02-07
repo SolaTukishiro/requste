@@ -123,4 +123,74 @@ class RequestApplication extends Controller
 
         return redirect()->route('creator.requests.applications.show')->with('success', '応募を取り下げました');
     }
+
+    // ========== Client用メソッド ==========
+
+    public function clientApplicationsIndex(RequestModel $request)
+    {
+        // 自分の依頼のみ閲覧可能
+        if ($request->client_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $request->load(['applications.creator']);
+
+        return view('client.requests.applications', compact('request'));
+    }
+
+    public function clientApplicationDetail(RequestModel $request, RequestApplicationModel $application)
+    {
+        // 自分の依頼のみ閲覧可能
+        if ($request->client_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // 応募がこの依頼に属しているかチェック
+        if ($application->request_id !== $request->id) {
+            abort(404);
+        }
+
+        $application->load('creator');
+
+        return view('client.requests.applicationDetail', compact('request', 'application'));
+    }
+
+    public function clientAllApplications(Request $httpRequest)
+    {
+        $tab = $httpRequest->query('tab', 'pending');
+
+        // クライアントの全依頼に来た応募を取得
+        $query = RequestApplicationModel::whereHas('request', function ($q) {
+            $q->where('client_id', auth()->id());
+        })->with(['request', 'creator']);
+
+        if ($tab === 'pending') {
+            $query->where('status', 'pending');
+        } elseif ($tab === 'accepted') {
+            $query->where('status', 'accepted');
+        } elseif ($tab === 'rejected') {
+            $query->where('status', 'rejected');
+        } elseif ($tab === 'all') {
+            // 何もしない
+        } else {
+            $tab = 'pending';
+            $query->where('status', 'pending');
+        }
+
+        $applications = $query->latest()->paginate(12)->appends(['tab' => $tab]);
+
+        return view('client.applications.index', compact('applications', 'tab'));
+    }
+
+    public function clientAllApplicationDetail(RequestApplicationModel $application)
+    {
+        // 自分の依頼への応募のみ閲覧可能
+        if ($application->request->client_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $application->load(['request', 'creator']);
+
+        return view('client.applications.detail', compact('application'));
+    }
 }
