@@ -159,10 +159,10 @@ class RequestApplication extends Controller
     {
         $tab = $httpRequest->query('tab', 'pending');
 
-        // クライアントの全依頼に来た応募を取得
+        // クライアントの全依頼に来た応募を取得（削除済み依頼も含む）
         $query = RequestApplicationModel::whereHas('request', function ($q) {
-            $q->where('client_id', auth()->id());
-        })->with(['request', 'creator']);
+            $q->withTrashed()->where('client_id', auth()->id());
+        })->with(['request' => fn($q) => $q->withTrashed(), 'creator']);
 
         if ($tab === 'pending') {
             $query->where('status', 'pending');
@@ -184,12 +184,18 @@ class RequestApplication extends Controller
 
     public function clientAllApplicationDetail(RequestApplicationModel $application)
     {
+        // 削除済み依頼も含めてロード
+        $application->load(['request' => fn($q) => $q->withTrashed(), 'creator']);
+
+        // 依頼が存在しない場合は404
+        if (!$application->request) {
+            abort(404);
+        }
+
         // 自分の依頼への応募のみ閲覧可能
         if ($application->request->client_id !== auth()->id()) {
             abort(403);
         }
-
-        $application->load(['request', 'creator']);
 
         return view('client.applications.detail', compact('application'));
     }
