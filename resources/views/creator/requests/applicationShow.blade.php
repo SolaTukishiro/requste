@@ -22,7 +22,7 @@
                         @endif
                     </div>
                     <p class="request-index__description">
-                        {{ \Illuminate\Support\Str::limit($application->description, 120) }}
+                        {{ \Illuminate\Support\Str::limit($application->message, 120) }}
                     </p>
                     <div class="request-index__meta">
                         <span class="request-index__price">¥{{ number_format($application->proposed_price) }}</span>

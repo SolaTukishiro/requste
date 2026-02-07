@@ -88,12 +88,20 @@ class RequestApplication extends Controller
 
     public function applicationsShow()
     {
-        $applicationList = RequestApplicationModel::where('creator_id', auth()->id())->latest()->get();
+        $applicationList = RequestApplicationModel::where('creator_id', auth()->id())
+            ->with('request.client')
+            ->latest()
+            ->get();
 
         return view('creator.requests.applicationShow', compact('applicationList'));
     }
 
     public function applicationsShowDetail(RequestApplicationModel $application){
+        // 自分の応募のみ閲覧可能
+        if ($application->creator_id !== auth()->id()) {
+            abort(403);
+        }
+
         $application->load(['request.client', 'creator']);
 
         return view('creator.requests.applicationShowDetail', compact('application'));
