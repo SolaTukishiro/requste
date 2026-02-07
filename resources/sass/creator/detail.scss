@@ -74,6 +74,24 @@
       background: var(--rose);
       border-color: rgba(55, 48, 163, 0.2);
     }
+
+    &.is-pending {
+      color: #b45309;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-color: rgba(180, 83, 9, 0.25);
+    }
+
+    &.is-accepted {
+      color: #047857;
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-color: rgba(4, 120, 87, 0.25);
+    }
+
+    &.is-rejected {
+      color: #6b7280;
+      background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+      border-color: rgba(107, 114, 128, 0.25);
+    }
   }
 
   &__meta {
@@ -151,6 +169,18 @@
       color: #1e3a8a;
       background: #dbeafe;
       border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    &.is-danger {
+      color: #fff;
+      background: #ef4444;
+      border-color: #ef4444;
+      cursor: pointer;
+
+      &:hover {
+        background: #dc2626;
+        border-color: #dc2626;
+      }
     }
 
     &:hover {
