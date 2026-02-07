@@ -114,6 +114,11 @@ class RequestApplication extends Controller
             abort(403);
         }
 
+        // 選考中の場合のみ取り下げ可能
+        if ($application->status?->value !== 'pending') {
+            return redirect()->back()->with('error', '選考が終了した応募は取り下げできません');
+        }
+
         $application->delete();
 
         return redirect()->route('creator.requests.applications.show')->with('success', '応募を取り下げました');
