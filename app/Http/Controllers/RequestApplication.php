@@ -60,6 +60,10 @@ class RequestApplication extends Controller
 
     public function requestsApplicationStore(RequestModel $request, Request $httpRequest): RedirectResponse
     {
+        if (!$request->status) {
+            return redirect()->back()->with('error', '募集が終了した案件には応募できません');
+        }
+
         // 既に応募済みかチェック
         $existingApplication = RequestApplicationModel::where('request_id', $request->id)
             ->where('creator_id', auth()->id())
@@ -90,7 +94,9 @@ class RequestApplication extends Controller
     public function applicationsShow()
     {
         $applicationList = RequestApplicationModel::where('creator_id', auth()->id())
-            ->with('request.client')
+            ->with([
+                'request' => fn($q) => $q->withTrashed()->with('client'),
+            ])
             ->latest()
             ->get();
 
@@ -103,7 +109,14 @@ class RequestApplication extends Controller
             abort(403);
         }
 
-        $application->load(['request.client', 'creator']);
+        $application->load([
+            'request' => fn($q) => $q->withTrashed()->with('client'),
+            'creator',
+        ]);
+
+        if (!$application->request) {
+            abort(404);
+        }
 
         return view('creator.requests.applicationShowDetail', compact('application'));
     }
