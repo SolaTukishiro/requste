@@ -41,11 +41,45 @@
                 <p class="request-detail__description">{{ $application->message }}</p>
             </div>
 
+            @if($application->status?->value === 'pending')
+                <div class="request-detail__actions">
+                    <form action="{{ route('client.applications.accept', $application) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="request-detail__button is-primary" onclick="return confirm('このクリエイターを採用しますか？')">
+                            採用する
+                        </button>
+                    </form>
+                    <form action="{{ route('client.applications.reject', $application) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="request-detail__button is-danger" onclick="return confirm('この応募を見送りますか？')">
+                            見送る
+                        </button>
+                    </form>
+                </div>
+            @endif
+
+            @if($application->status?->value === 'accepted' && $application->conversation)
+                <div class="request-detail__actions" style="margin-top: 10px;">
+                    <a class="request-detail__button is-primary" href="{{ route('client.conversations.show', $application->conversation) }}">
+                        チャットを開く
+                    </a>
+                </div>
+            @endif
+
             <div class="request-detail__actions">
                 <a class="request-detail__button is-ghost" href="{{ route('client.requests.applications', $request) }}">
                     応募一覧へ戻る
                 </a>
             </div>
+
+            @if(session('success'))
+                <div class="request-detail__flash is-success">{{ session('success') }}</div>
+            @endif
+            @if(session('error'))
+                <div class="request-detail__flash is-error">{{ session('error') }}</div>
+            @endif
         </div>
     </div>
 </x-app-layout>

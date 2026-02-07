@@ -28,6 +28,9 @@
                         <x-nav-link :href="route('client.applications.index')" :active="request()->routeIs('client.applications.index')">
                             応募者一覧
                         </x-nav-link>
+                        <x-nav-link :href="route('client.conversations.index')" :active="request()->routeIs('client.conversations.*')">
+                            チャット
+                        </x-nav-link>
                     @elseif(Auth::user()->role->value === 'creator')
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
@@ -46,6 +49,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('creator.applications.deleted.index')" :active="request()->routeIs('creator.applications.deleted.index')">
                             削除済み案件一覧
+                        </x-nav-link>
+                        <x-nav-link :href="route('creator.conversations.index')" :active="request()->routeIs('creator.conversations.*')">
+                            チャット
                         </x-nav-link>
                     @endif
                 </div>

@@ -43,7 +43,7 @@
                     </div>
                     <div class="request-detail__meta-item">
                         <span class="request-detail__label">納期見積もり</span>
-                        <span class="request-detail__value">{{ $application->delivery_estimate }}</span>
+                        <span class="request-detail__value">{{ $application->delivery_estimate }}日</span>
                     </div>
                 </div>
             </div>
@@ -52,6 +52,14 @@
                 <h3 class="request-detail__section-title">応募メッセージ</h3>
                 <p class="request-detail__description">{{ $application->message }}</p>
             </div>
+
+            @if($application->status?->value === 'accepted' && $application->conversation)
+                <div class="request-detail__actions" style="margin-top: 10px;">
+                    <a class="request-detail__button is-primary" href="{{ route('creator.conversations.show', $application->conversation) }}">
+                        チャットを開く
+                    </a>
+                </div>
+            @endif
 
             <div class="request-detail__actions">
                 <a class="request-detail__button is-ghost" href="{{ route('creator.requests.applications.show') }}">

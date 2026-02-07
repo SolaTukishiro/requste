@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conversation;
 use App\Models\Request as RequestModel;
 use App\Models\RequestApplication as RequestApplicationModel;
 use Illuminate\Http\RedirectResponse;
@@ -198,5 +199,50 @@ class RequestApplication extends Controller
         }
 
         return view('client.applications.detail', compact('application'));
+    }
+
+    public function accept(RequestApplicationModel $application): RedirectResponse
+    {
+        $this->authorizeClientOwnership($application);
+
+        if ($application->status->value !== 'pending') {
+            return redirect()->back()->with('error', 'この応募は既に選考済みです');
+        }
+
+        $application->update(['status' => 'accepted']);
+
+        // 採用時にConversationを自動作成（まだ存在しない場合のみ）
+        Conversation::firstOrCreate(
+            ['request_application_id' => $application->id],
+            [
+                'request_id' => $application->request_id,
+                'client_id' => $application->request->client_id,
+                'creator_id' => $application->creator_id,
+            ]
+        );
+
+        return redirect()->back()->with('success', 'クリエイターを採用しました');
+    }
+
+    public function reject(RequestApplicationModel $application): RedirectResponse
+    {
+        $this->authorizeClientOwnership($application);
+
+        if ($application->status->value !== 'pending') {
+            return redirect()->back()->with('error', 'この応募は既に選考済みです');
+        }
+
+        $application->update(['status' => 'rejected']);
+
+        return redirect()->back()->with('success', '応募を見送りました');
+    }
+
+    private function authorizeClientOwnership(RequestApplicationModel $application): void
+    {
+        $application->load(['request' => fn($q) => $q->withTrashed()]);
+
+        if (!$application->request || $application->request->client_id !== auth()->id()) {
+            abort(403);
+        }
     }
 }

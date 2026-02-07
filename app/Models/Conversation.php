@@ -18,6 +18,16 @@ class Conversation extends Model
         return $this->belongsTo(RequestApplication::class, 'request_application_id');
     }
 
+    public function client()
+    {
+        return $this->belongsTo(User::class, 'client_id');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
     public function messages()
     {
         return $this->hasMany(Message::class);
