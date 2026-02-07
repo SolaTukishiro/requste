@@ -32,7 +32,10 @@
                         <x-nav-link :href="route('creator.requests.show')" :active="request()->routeIs('creator.requests.show')">
                             公開依頼一覧
                         </x-nav-link>
-                        <x-nav-link :href="route('creator.applications.create')" :active="request()->routeIs('client.requests.create')">
+                        <x-nav-link :href="route('creator.requests.applications.show')" :active="request()->routeIs('creator.requests.applications.show')">
+                            応募済み案件
+                        </x-nav-link>
+                        <x-nav-link :href="route('creator.applications.create')" :active="request()->routeIs('creator.applications.create')">
                             案件作成
                         </x-nav-link>
                         <x-nav-link :href="route('creator.applications.index')" :active="request()->routeIs('creator.applications.index')">

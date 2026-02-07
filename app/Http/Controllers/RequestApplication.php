@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Request as RequestModel;
 use App\Models\RequestApplication as RequestApplicationModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -56,7 +57,8 @@ class RequestApplication extends Controller
         return view('creator.requests.application', compact('request'));
     }
 
-    public function requestsApplicationStore(RequestModel $request, Request $httpRequest){
+    public function requestsApplicationStore(RequestModel $request, Request $httpRequest): RedirectResponse
+    {
         // 既に応募済みかチェック
         $existingApplication = RequestApplicationModel::where('request_id', $request->id)
             ->where('creator_id', auth()->id())
@@ -82,5 +84,30 @@ class RequestApplication extends Controller
 
 
         return redirect()->route('creator.requests.show')->with('success', '案件に応募しました');
+    }
+
+    public function applicationsShow()
+    {
+        $applicationList = RequestApplicationModel::where('creator_id', auth()->id())->latest()->get();
+
+        return view('creator.requests.applicationShow', compact('applicationList'));
+    }
+
+    public function applicationsShowDetail(RequestApplicationModel $application){
+        $application->load(['request.client', 'creator']);
+
+        return view('creator.requests.applicationShowDetail', compact('application'));
+    }
+
+    public function applicationsDestroy(RequestApplicationModel $application): RedirectResponse
+    {
+        // 自分の応募のみ削除可能
+        if ($application->creator_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $application->delete();
+
+        return redirect()->route('creator.requests.applications.show')->with('success', '応募を取り下げました');
     }
 }
