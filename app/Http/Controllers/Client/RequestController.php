@@ -55,14 +55,14 @@ class RequestController extends Controller
 
         return view('client.requests.edit', compact('request'));
     }
-    public function update(RequestModel $requestModel, Request $request){
-        $this->authorize('update', $requestModel);
+    public function update(RequestModel $request, Request $httpRequest){
+        $this->authorize('update', $request);
 
-        $requestModel->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'status' => $request->status,
-            'price' => $request->price,
+        $request->update([
+            'title' => $httpRequest->title,
+            'description' => $httpRequest->description,
+            'status' => $httpRequest->status,
+            'price' => $httpRequest->price,
         ]);
 
         return redirect()->route('client.requests.index');
