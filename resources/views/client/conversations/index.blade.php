@@ -11,8 +11,8 @@
                 <a href="{{ route('client.conversations.show', $conversation) }}" class="chat-list__item">
                     <div class="chat-list__info">
                         @if($conversation->application_request_id)
-                            <div class="chat-list__name">{{ $conversation->applicationRequest->application->creator->name ?? '不明' }}</div>
-                            <div class="chat-list__request-title">{{ $conversation->applicationRequest->application->title ?? '削除済み案件' }}</div>
+                            <div class="chat-list__name">{{ $conversation->applicationRequest?->application?->creator?->name ?? '不明' }}</div>
+                            <div class="chat-list__request-title">{{ $conversation->applicationRequest?->application?->title ?? '削除済み案件' }}</div>
                         @else
                             <div class="chat-list__name">{{ $conversation->application->creator->name ?? '不明' }}</div>
                             <div class="chat-list__request-title">{{ $conversation->application->request->title ?? '削除済み案件' }}</div>

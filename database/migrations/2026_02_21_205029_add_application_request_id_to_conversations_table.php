@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -32,6 +33,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // application_request経由で作成されたチャット（request_application_id がnull）を削除
+        DB::table('conversations')->whereNull('request_application_id')->delete();
+
         Schema::table('conversations', function (Blueprint $table) {
             $table->dropForeign(['application_request_id']);
             $table->dropUnique(['application_request_id']);

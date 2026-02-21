@@ -8,8 +8,8 @@
 
         <div class="chat__header">
             @if($conversation->application_request_id)
-                <h3 class="chat__header-title">{{ $conversation->applicationRequest->client->name ?? '不明' }}</h3>
-                <p class="chat__header-subtitle">{{ $conversation->applicationRequest->application->title ?? '削除済み案件' }}</p>
+                <h3 class="chat__header-title">{{ $conversation->applicationRequest?->client?->name ?? '不明' }}</h3>
+                <p class="chat__header-subtitle">{{ $conversation->applicationRequest?->application?->title ?? '削除済み案件' }}</p>
             @else
                 <h3 class="chat__header-title">{{ $conversation->application->request->client->name ?? '不明' }}</h3>
                 <p class="chat__header-subtitle">{{ $conversation->application->request->title ?? '削除済み案件' }}</p>

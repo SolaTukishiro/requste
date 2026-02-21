@@ -18,7 +18,7 @@ class ConversationController extends Controller
                 ->with([
                     'application.creator',
                     'application.request',
-                    'applicationRequest.application.creator',
+                    'applicationRequest.application' => fn($q) => $q->withTrashed()->with('creator'),
                     'messages' => fn($q) => $q->latest()->limit(1),
                 ])
                 ->latest('updated_at')
@@ -28,7 +28,7 @@ class ConversationController extends Controller
                 ->with([
                     'application.request.client',
                     'applicationRequest.client',
-                    'applicationRequest.application',
+                    'applicationRequest.application' => fn($q) => $q->withTrashed(),
                     'messages' => fn($q) => $q->latest()->limit(1),
                 ])
                 ->latest('updated_at')
@@ -47,7 +47,7 @@ class ConversationController extends Controller
             'application.request.client',
             'application.creator',
             'applicationRequest.client',
-            'applicationRequest.application.creator',
+            'applicationRequest.application' => fn($q) => $q->withTrashed()->with('creator'),
         ]);
 
         $role = auth()->user()->role->value;
