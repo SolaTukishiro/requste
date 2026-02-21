@@ -53,6 +53,14 @@
                 <p class="request-detail__description">{{ $applicationRequest->message }}</p>
             </div>
 
+            @if($applicationRequest->status?->value === 'accepted' && $applicationRequest->conversation)
+                <div class="request-detail__actions" style="margin-top: 10px;">
+                    <a class="request-detail__button is-primary" href="{{ route('client.conversations.show', $applicationRequest->conversation) }}">
+                        チャットを開く
+                    </a>
+                </div>
+            @endif
+
             <div class="request-detail__actions" style="margin-top: 10px;">
                 <a class="request-detail__button is-ghost" href="{{ route('client.creator-applications.my-requests') }}">
                     依頼一覧へ戻る

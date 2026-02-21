@@ -15,12 +15,22 @@ class ConversationController extends Controller
 
         if ($role === 'client') {
             $conversations = Conversation::where('client_id', $user->id)
-                ->with(['application.creator', 'application.request', 'messages' => fn($q) => $q->latest()->limit(1)])
+                ->with([
+                    'application.creator',
+                    'application.request',
+                    'applicationRequest.application.creator',
+                    'messages' => fn($q) => $q->latest()->limit(1),
+                ])
                 ->latest('updated_at')
                 ->get();
         } else {
             $conversations = Conversation::where('creator_id', $user->id)
-                ->with(['application.request.client', 'messages' => fn($q) => $q->latest()->limit(1)])
+                ->with([
+                    'application.request.client',
+                    'applicationRequest.client',
+                    'applicationRequest.application',
+                    'messages' => fn($q) => $q->latest()->limit(1),
+                ])
                 ->latest('updated_at')
                 ->get();
         }
@@ -32,7 +42,13 @@ class ConversationController extends Controller
     {
         $this->authorizeAccess($conversation);
 
-        $conversation->load(['messages.sender', 'application.request.client', 'application.creator']);
+        $conversation->load([
+            'messages.sender',
+            'application.request.client',
+            'application.creator',
+            'applicationRequest.client',
+            'applicationRequest.application.creator',
+        ]);
 
         $role = auth()->user()->role->value;
 

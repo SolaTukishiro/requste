@@ -9,6 +9,7 @@ class Conversation extends Model
     protected $fillable = [
         'request_application_id',
         'request_id',
+        'application_request_id',
         'client_id',
         'creator_id'
     ];
@@ -16,6 +17,11 @@ class Conversation extends Model
     public function application()
     {
         return $this->belongsTo(RequestApplication::class, 'request_application_id');
+    }
+
+    public function applicationRequest()
+    {
+        return $this->belongsTo(ApplicationRequest::class, 'application_request_id');
     }
 
     public function client()

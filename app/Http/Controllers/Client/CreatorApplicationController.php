@@ -115,7 +115,7 @@ class CreatorApplicationController extends Controller
             abort(403);
         }
 
-        $applicationRequest->load(['application' => fn($q) => $q->withTrashed()->with('creator')]);
+        $applicationRequest->load(['application' => fn($q) => $q->withTrashed()->with('creator'), 'conversation']);
 
         if (!$applicationRequest->application) {
             abort(404);

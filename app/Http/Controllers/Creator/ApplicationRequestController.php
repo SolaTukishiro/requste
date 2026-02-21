@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Creator;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\ApplicationRequest;
+use App\Models\Conversation;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,7 @@ class ApplicationRequestController extends Controller
 
     public function detail(ApplicationRequest $applicationRequest)
     {
-        $applicationRequest->load(['application' => fn($q) => $q->withTrashed(), 'client']);
+        $applicationRequest->load(['application' => fn($q) => $q->withTrashed(), 'client', 'conversation']);
 
         if (!$applicationRequest->application || $applicationRequest->application->creator_id !== auth()->id()) {
             abort(403);
@@ -56,6 +57,15 @@ class ApplicationRequestController extends Controller
         }
 
         $applicationRequest->update(['status' => 'accepted']);
+
+        // 承認時にConversationを自動作成（まだ存在しない場合のみ）
+        Conversation::firstOrCreate(
+            ['application_request_id' => $applicationRequest->id],
+            [
+                'client_id' => $applicationRequest->client_id,
+                'creator_id' => $applicationRequest->application->creator_id,
+            ]
+        );
 
         return redirect()->back()->with('success', 'クライアントの依頼を承認しました');
     }
