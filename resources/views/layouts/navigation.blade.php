@@ -28,6 +28,9 @@
                         <x-nav-link :href="route('client.applications.index')" :active="request()->routeIs('client.applications.index')">
                             応募者一覧
                         </x-nav-link>
+                        <x-nav-link :href="route('client.creator-applications.index')" :active="request()->routeIs('client.creator-applications.*')">
+                            案件一覧
+                        </x-nav-link>
                         <x-nav-link :href="route('client.conversations.index')" :active="request()->routeIs('client.conversations.*')">
                             チャット
                         </x-nav-link>
@@ -106,9 +109,51 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @if(Auth::user()->role->value === 'client')
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('client.requests.create')" :active="request()->routeIs('client.requests.create')">
+                    募集作成
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('client.requests.index')" :active="request()->routeIs('client.requests.index')">
+                    作成募集一覧
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('client.requests.deleted.index')" :active="request()->routeIs('client.requests.deleted.index')">
+                    削除済み依頼一覧
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('client.applications.index')" :active="request()->routeIs('client.applications.index')">
+                    応募者一覧
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('client.creator-applications.index')" :active="request()->routeIs('client.creator-applications.*')">
+                    案件一覧
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('client.conversations.index')" :active="request()->routeIs('client.conversations.*')">
+                    チャット
+                </x-responsive-nav-link>
+            @elseif(Auth::user()->role->value === 'creator')
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('creator.requests.show')" :active="request()->routeIs('creator.requests.show')">
+                    公開依頼一覧
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('creator.requests.applications.show')" :active="request()->routeIs('creator.requests.applications.show')">
+                    応募済み案件
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('creator.applications.create')" :active="request()->routeIs('creator.applications.create')">
+                    案件作成
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('creator.applications.index')" :active="request()->routeIs('creator.applications.index')">
+                    作成案件一覧
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('creator.applications.deleted.index')" :active="request()->routeIs('creator.applications.deleted.index')">
+                    削除済み案件一覧
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('creator.conversations.index')" :active="request()->routeIs('creator.conversations.*')">
+                    チャット
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

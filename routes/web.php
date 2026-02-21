@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\CreatorApplicationController;
 use App\Http\Controllers\Client\RequestController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\ProfileController;
@@ -38,6 +39,8 @@ Route::middleware(['auth','role:client'])->prefix('client')->name('client.')->gr
     Route::get('/applications/{application}', [RequestApplication::class, 'clientAllApplicationDetail'])->name('applications.detail');
     Route::patch('/applications/{application}/accept', [RequestApplication::class, 'accept'])->name('applications.accept');
     Route::patch('/applications/{application}/reject', [RequestApplication::class, 'reject'])->name('applications.reject');
+    Route::get('/creator-applications', [CreatorApplicationController::class, 'index'])->name('creator-applications.index');
+    Route::get('/creator-applications/{application}', [CreatorApplicationController::class, 'detail'])->name('creator-applications.detail');
     Route::get('/conversations', [ConversationController::class, 'index'])->name('conversations.index');
     Route::get('/conversations/{conversation}', [ConversationController::class, 'show'])->name('conversations.show');
     Route::post('/conversations/{conversation}/messages', [ConversationController::class, 'sendMessage'])->name('conversations.sendMessage');
