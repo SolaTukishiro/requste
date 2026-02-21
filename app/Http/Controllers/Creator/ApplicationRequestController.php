@@ -15,8 +15,8 @@ class ApplicationRequestController extends Controller
         $tab = $request->query('tab', 'pending');
 
         $query = ApplicationRequest::whereHas('application', function ($q) {
-            $q->where('creator_id', auth()->id());
-        })->with(['application', 'client']);
+            $q->withTrashed()->where('creator_id', auth()->id());
+        })->with(['application' => fn($q) => $q->withTrashed(), 'client']);
 
         if ($tab === 'pending') {
             $query->where('status', 'pending');
@@ -38,7 +38,7 @@ class ApplicationRequestController extends Controller
 
     public function detail(ApplicationRequest $applicationRequest)
     {
-        $applicationRequest->load(['application', 'client']);
+        $applicationRequest->load(['application' => fn($q) => $q->withTrashed(), 'client']);
 
         if (!$applicationRequest->application || $applicationRequest->application->creator_id !== auth()->id()) {
             abort(403);
@@ -75,7 +75,7 @@ class ApplicationRequestController extends Controller
 
     private function authorizeCreatorOwnership(ApplicationRequest $applicationRequest): void
     {
-        $applicationRequest->load('application');
+        $applicationRequest->load(['application' => fn($q) => $q->withTrashed()]);
 
         if (!$applicationRequest->application || $applicationRequest->application->creator_id !== auth()->id()) {
             abort(403);
