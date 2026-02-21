@@ -28,8 +28,11 @@
                         <x-nav-link :href="route('client.applications.index')" :active="request()->routeIs('client.applications.index')">
                             応募者一覧
                         </x-nav-link>
-                        <x-nav-link :href="route('client.creator-applications.index')" :active="request()->routeIs('client.creator-applications.*')">
+                        <x-nav-link :href="route('client.creator-applications.index')" :active="request()->routeIs('client.creator-applications.index')">
                             案件一覧
+                        </x-nav-link>
+                        <x-nav-link :href="route('client.creator-applications.my-requests')" :active="request()->routeIs('client.creator-applications.my-request*')">
+                            依頼済み案件
                         </x-nav-link>
                         <x-nav-link :href="route('client.conversations.index')" :active="request()->routeIs('client.conversations.*')">
                             チャット
@@ -52,6 +55,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('creator.applications.deleted.index')" :active="request()->routeIs('creator.applications.deleted.index')">
                             削除済み案件一覧
+                        </x-nav-link>
+                        <x-nav-link :href="route('creator.application-requests.index')" :active="request()->routeIs('creator.application-requests.*')">
+                            依頼者一覧
                         </x-nav-link>
                         <x-nav-link :href="route('creator.conversations.index')" :active="request()->routeIs('creator.conversations.*')">
                             チャット
@@ -125,8 +131,11 @@
                 <x-responsive-nav-link :href="route('client.applications.index')" :active="request()->routeIs('client.applications.index')">
                     応募者一覧
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('client.creator-applications.index')" :active="request()->routeIs('client.creator-applications.*')">
+                <x-responsive-nav-link :href="route('client.creator-applications.index')" :active="request()->routeIs('client.creator-applications.index')">
                     案件一覧
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('client.creator-applications.my-requests')" :active="request()->routeIs('client.creator-applications.my-request*')">
+                    依頼済み案件
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('client.conversations.index')" :active="request()->routeIs('client.conversations.*')">
                     チャット
@@ -149,6 +158,9 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('creator.applications.deleted.index')" :active="request()->routeIs('creator.applications.deleted.index')">
                     削除済み案件一覧
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('creator.application-requests.index')" :active="request()->routeIs('creator.application-requests.*')">
+                    依頼者一覧
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('creator.conversations.index')" :active="request()->routeIs('creator.conversations.*')">
                     チャット

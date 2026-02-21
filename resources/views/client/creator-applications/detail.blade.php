@@ -42,7 +42,25 @@
                 <a class="request-detail__button is-ghost" href="{{ route('client.creator-applications.index') }}">
                     一覧へ戻る
                 </a>
+                @if($application->status)
+                    @if($isRequested)
+                        <button class="request-detail__button is-primary is-disabled" disabled>
+                            依頼済み
+                        </button>
+                    @else
+                        <a class="request-detail__button is-primary" href="{{ route('client.creator-applications.apply', $application) }}">
+                            依頼する
+                        </a>
+                    @endif
+                @endif
             </div>
         </div>
     </div>
+    <style>
+        .request-detail__button.is-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    </style>
 </x-app-layout>
