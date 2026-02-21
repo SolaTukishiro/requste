@@ -62,6 +62,14 @@
                 </div>
             @endif
 
+            @if($applicationRequest->status?->value === 'accepted' && $applicationRequest->conversation)
+                <div class="request-detail__actions" style="margin-top: 10px;">
+                    <a class="request-detail__button is-primary" href="{{ route('creator.conversations.show', $applicationRequest->conversation) }}">
+                        チャットを開く
+                    </a>
+                </div>
+            @endif
+
             <div class="request-detail__actions" style="margin-top: 10px; justify-content: flex-end;">
                 <a class="request-detail__button is-ghost" href="{{ route('creator.application-requests.index') }}">
                     依頼者一覧へ戻る

@@ -29,4 +29,9 @@ class ApplicationRequest extends Model
     {
         return $this->belongsTo(User::class, 'client_id');
     }
+
+    public function conversation()
+    {
+        return $this->hasOne(Conversation::class, 'application_request_id');
+    }
 }
