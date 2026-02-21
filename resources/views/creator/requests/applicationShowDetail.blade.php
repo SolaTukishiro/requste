@@ -61,7 +61,7 @@
                 </div>
             @endif
 
-            <div class="request-detail__actions">
+            <div class="request-detail__actions" style="margin-top: 10px;">
                 <a class="request-detail__button is-ghost" href="{{ route('creator.requests.applications.show') }}">
                     応募一覧へ戻る
                 </a>
